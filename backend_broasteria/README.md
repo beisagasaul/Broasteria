@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="100" alt="Nest Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -23,6 +23,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
+
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
@@ -69,5 +70,100 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
-
 Nest is [MIT licensed](LICENSE).
+
+
+
+
+
+
+
+
+<p align="center">
+  <h1 style="font-size: 4.5em;">Broasteria</h1>
+</p>
+
+
+
+![Imagen de una broasteria](https://cdn.pixabay.com/photo/2021/07/17/00/56/broaster-6472037_1280.jpg)
+
+
+## Descripción
+Este es un proyecto de backend para desarrollar un software de gestión de ventas para una Broastería. El software estará diseñado para ayudar en la administración de pedidos, control de inventario, gestión de clientes y generación de informes para optimizar el proceso de venta en una broastería.
+
+## Base de datos
+
+
+
+#### PRODUCTO
+| Campo                        
+|-----------------
+| id                    
+| nombre                
+| descripción        
+| precio_unitario 
+| stock                    
+| id_categoria             
+
+#### CLIENTES
+| Campo                  
+|------------
+| id               
+| nombres            
+| apellidos     
+| dirección       
+| teléfono     
+| email       
+
+#### CATEGORIAS
+| Campo                
+|-------------
+| id                
+| nombre          
+
+
+#### VENTAS
+| Campo                     
+|--------------
+| id                
+| id_cliente            
+| fecha             
+| total_venta         
+| estado       
+#### DETALLE_VENTAS
+| Campo                    
+|-------------
+| id                 
+| id_venta               
+| id_producto            
+| cantidad            
+| subtotal      
+
+#### EMPLEADOS
+| Campo                   
+|------------------
+| id                        
+| nombres                
+| apellidos             
+| cargo                  
+| salario                 
+| fecha_contratación     
+
+#### USUARIOS
+| Campo                          
+|---------------
+| id                     
+| nombre_usuario           
+| clave                      
+| id_empleado        
+| rol                    
+
+### Relaciones
+
+- **Clientes y Ventas**:Un cliente puede realizar muchas ventas, pero cada venta es de un único cliente.  **(1 a M)**
+- **Productos y DetalleVenta**:Un producto puede estar en varios detalleventa, y un detalleventa está asociado a un único producto. **(1 a M)**
+- **Categorías y Productos**:Una categoría puede tener varios productos, pero cada producto pertenece a una única categoría. **(1 a M)**
+- **Ventas y DetalleVenta**:Una venta puede tener varios detalles de venta, pero cada detalle de venta está asociado a una única venta. **(1 a M)**
+- **Empleados y Ventas**: Un empleado puede realizar muchas ventas, pero cada venta es realizada por un único empleado **(1 a M)**
+- **Usuarios y Empleados**: Un usuario está asociado a un único empleado, pero un empleado puede tener varios usuarios  **(1 a M)**
+
