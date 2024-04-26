@@ -39,7 +39,7 @@ export class CategoriasService {
   async update(id: number, updateCategoriaDto: UpdateCategoriaDto): Promise<Categoria> {
     const categoria = await this.findOne(id);
     const actualizaCategoria = Object.assign(categoria, updateCategoriaDto);
-    return this, this.categoriasRepository.save(actualizaCategoria);
+    return  this.categoriasRepository.save(actualizaCategoria);
   }
 
   async remove(id: number) {
