@@ -21,7 +21,7 @@ export class EmpleadosService {
       apellidos:createEmpleadoDto.apellidos.trim(),
       cargo:createEmpleadoDto.cargo.trim(),
       salario:createEmpleadoDto.salario,
-      fechaContratacion:createEmpleadoDto.fechaContratacion.trim(),
+      fechaContratacion:createEmpleadoDto.fechaContratacion,
 
     })
   }

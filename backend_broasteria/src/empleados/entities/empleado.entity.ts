@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('empleados')
 export class Empleado {
@@ -17,7 +17,15 @@ export class Empleado {
 
     @Column()
     salario:number;
+
     @Column('varchar',{length:20,nullable:false,name:'fecha_contratacion'})
-    fechaContratacion:string
+    fechaContratacion:Date;
+
+    @CreateDateColumn({ name: 'fecha_creacion' })
+    fechaCreacion: Date;
+   
+
+    @UpdateDateColumn({ name: 'fecha_modificacion' })
+    fechaModificacion: Date;
 
 }
