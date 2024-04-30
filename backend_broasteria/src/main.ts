@@ -14,7 +14,7 @@ async function bootstrap() {
     .setTitle('API REST BROASTERIA')
     .setDescription('Backend de una broasteria')
     .setVersion('1.0')
-    .addTag('categorias,empleados')
+    .addTag('categorias,empleados,productos')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidocumentation', app, document);
