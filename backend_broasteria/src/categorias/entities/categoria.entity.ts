@@ -12,7 +12,7 @@ export class Categoria {
     @CreateDateColumn({ name: 'fecha_creacion' })
     fechaCreacion: Date;
 
-    @UpdateDateColumn({ name: 'fecha_modificacion' })
+    @UpdateDateColumn({ name: 'fecha_modificacion' }) 
     fechaModificacion: Date;
 
 

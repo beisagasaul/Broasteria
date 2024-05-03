@@ -28,4 +28,7 @@ export class Empleado {
     @UpdateDateColumn({ name: 'fecha_modificacion' })
     fechaModificacion: Date;
 
+
+    
+
 }
