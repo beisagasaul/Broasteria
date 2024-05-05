@@ -8,6 +8,7 @@ import { EmpleadosModule } from './empleados/empleados.module';
 import { ProductosModule } from './productos/productos.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { VentasModule } from './ventas/ventas.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 
 @Module({
@@ -28,7 +29,8 @@ import { VentasModule } from './ventas/ventas.module';
     EmpleadosModule,
     ProductosModule,
     ClientesModule,
-    VentasModule
+    VentasModule,
+    UsuariosModule 
 
    
   ],

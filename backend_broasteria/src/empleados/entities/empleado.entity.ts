@@ -27,7 +27,7 @@ export class Empleado {
 
     @UpdateDateColumn({ name: 'fecha_modificacion' })
     fechaModificacion: Date;
-
+//un empelado puede tener un usaurio
 
     
 

@@ -147,15 +147,15 @@ Este es un proyecto de backend para desarrollar un software de gestión de venta
 | apellidos             
 | cargo                  
 | salario                 
-| fecha_contratación     
+| fecha_contratación  
+ id_usuario    
 
 #### USUARIOS
 | Campo                          
 |---------------
 | id                     
 | nombre_usuario           
-| clave                      
-| id_empleado        
+| clave                             
 | rol                    
 
 ### Relaciones
