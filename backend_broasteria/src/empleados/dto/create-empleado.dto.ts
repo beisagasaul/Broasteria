@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDateString, IsDefined, IsNotEmpty, IsNumber, IsString, MaxLength, Min, MinLength } from "class-validator";
+import { CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 export class CreateEmpleadoDto {
     @ApiProperty()
@@ -36,8 +37,15 @@ export class CreateEmpleadoDto {
     @IsDateString({}, { message: 'El campo fechaLanzamiento debe ser de tipo fecha' })
     readonly fechaContratacion: Date;
 
+    @CreateDateColumn({ name: 'fecha_creacion' })
+    fechaCreacion: Date;
+
+    @UpdateDateColumn({ name: 'fecha_modificacion' })
+    fechaModificacion: Date;
+
     @ApiProperty()
     @IsDefined({ message: 'El campo iUsuario debe estar definido' })
     @IsNumber({}, { message: 'El campo idUsuario debe ser de tipo numérico' })
     readonly idUsuario: number;
+    
 }
