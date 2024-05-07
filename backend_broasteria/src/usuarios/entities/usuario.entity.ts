@@ -11,8 +11,7 @@ export class Usuario {
     clave: string;
     @Column('varchar', { length: 50, nullable: false })
     email: string;
-    @Column('varchar', { length: 20, nullable: false })
-    rol: string;
+    
     @CreateDateColumn({ name: 'fecha_creacion' })
     fechaCreacion: Date;
 

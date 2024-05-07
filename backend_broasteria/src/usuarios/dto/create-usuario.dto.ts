@@ -16,11 +16,6 @@ export class CreateUsuarioDto {
     @MinLength(10, { message: 'El campo email no debe ser menor a 10 caracteres' })
     readonly email: string;
 
-    @ApiProperty()
-    @IsNotEmpty({ message: 'El campo rol no debe ser vacío' })
-    @IsString({ message: 'El campo rol debe tener el formato correcto' })
-    @MaxLength(15, { message: 'El campo rol no debe ser mayor a 15 caracteres' })
-    @MinLength(3, { message: 'El campo rol no debe ser menor a 3 caracteres' })
-    readonly rol: string;
+   
 
 }
