@@ -9,6 +9,24 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+
+
+    {
+      path: '/productos',
+      name: 'productos',
+      component: () => import('../views/ProductoView.vue'),
+      children: [
+      { path: '', component: () => import('../components/producto/ProductoList.vue') },
+      // { path: 'crear', component: () => import('../components/interprete/InterpreteCreate.vue') },
+      // {
+      //   path: 'editar/:id',
+      //   component: () => import('../components/interprete/InterpreteEdit.vue')
+      // }
+      ]
+    },
+
+
+
     {
       path: '/about',
       name: 'about',
