@@ -11,16 +11,9 @@ import HelloWorld from './components/HelloWorld.vue'
       <HelloWorld msg="Broasteria" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">Ayuda</RouterLink>
-        <RouterLink to="/usuarios">Usuarios</RouterLink>
-        <RouterLink to="/clientes">Clientes</RouterLink>
-        <RouterLink to="/empleados">Empleados</RouterLink>
+        <RouterLink to="/">Inicio</RouterLink>
         <RouterLink to="/productos">Productos</RouterLink>
-        <RouterLink to="/ventaDetalles">Detalle de venta</RouterLink>
-        <RouterLink to="/ventas">Ventas</RouterLink>
-        <RouterLink to="/categoria">Categoria</RouterLink>
-        
+        <RouterLink to="/about">Acerca de</RouterLink>
       </nav>
     </div>
   </header>

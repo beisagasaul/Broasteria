@@ -17,7 +17,7 @@ export class Producto {
     descripcion: string;
 
     @Column({name:'precio_unitario'})
-    precioUnitario:number
+    precioUnitario:number;
 
 
     @Column()

@@ -5,4 +5,4 @@ const axios = Axios.create({
   headers: { 'Content-type': 'application/json' }
 })
 
-export default axios
+export default axios 

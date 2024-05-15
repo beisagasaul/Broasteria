@@ -15,7 +15,7 @@ export class CreateProductoDto {
     @IsNotEmpty({ message: 'el campo descripcion no debe ser vacio' })
     @IsString({ message: 'El campo descricion debe ser de tipo cadena' })
     @MaxLength(200, { message: 'el campo descripcion debe ser menor a 200 caracteres' })
-    @MinLength(10, { message: 'El campo descripcion debe ser mayor a 10 caracteres' })
+    @MinLength(2, { message: 'El campo descripcion debe ser mayor a 10 caracteres' })
     readonly descripcion: string;
 
 
