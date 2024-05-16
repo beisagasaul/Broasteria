@@ -5,8 +5,7 @@ export class CreateClienteDto {
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo nombres no debe ser vacío' })
   @IsString({ message: 'El campo nombres debe ser de tipo cadena' })
-  @MaxLength(50, {message: 'El campo nombres no debe ser nemor a 50 caracteres',
-  })
+  @MaxLength(50, {message: 'El campo nombres no debe ser nemor a 50 caracteres'})
   @MinLength(4, {message: 'El campo nombres no debe ser mayor a 4 caracteres'})
   readonly nombres: string;
 
@@ -20,14 +19,14 @@ export class CreateClienteDto {
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo direccion no debe ser vacío' })
   @IsString({ message: 'El campo direccion debe ser de tipo cadena' })
-  @MaxLength(30, { message: 'El campo direccion no debe ser nemor a 30 caracteres'})
+  @MaxLength(50, { message: 'El campo direccion no debe ser nemor a 30 caracteres'})
   @MinLength(4, { message: 'El campo direccion no debe ser mayor a 4 caracteres'})
   readonly direccion: string;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo telefono no debe ser vacío' })
   @IsString({ message: 'El campo telefono debe ser de tipo cadena' })
-  @MaxLength(8, { message: 'El campo telefono no debe ser nemor a 8 caracteres' })
+  @MaxLength(50, { message: 'El campo telefono no debe ser nemor a 8 caracteres' })
   @MinLength(4, {message: 'El campo telefono no debe ser mayor a 4 caracteres'})
   readonly telefono: string;
 

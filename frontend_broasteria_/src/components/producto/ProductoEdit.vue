@@ -27,7 +27,10 @@ async function editarProducto() {
 
 async function getProducto() {
   await http.get(`${ENDPOINT}/${id}`).then((response) => {
-    ;(nombre.value = response.data.nombre), (descripcion.value = response.data.descripcion), ( precioUnitario.value = response.data. precioUnitario), (stock.value = response.data.stock)
+    ;(nombre.value = response.data.nombre),
+     (descripcion.value = response.data.descripcion), 
+     ( precioUnitario.value = response.data. precioUnitario),
+      (stock.value = response.data.stock)
   })
 }
 
@@ -46,14 +49,14 @@ onMounted(() => {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/interpretes">Intérpretes</RouterLink>
+          <RouterLink to="/interpretes">Productos</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>EditarProducto</h2>
+      <h2>Editar Producto</h2>
     </div>
 
     <div class="row">
@@ -61,31 +64,45 @@ onMounted(() => {
 
       
         <div class="form-floating mb-3">
-           <input type="text" class="form-control" v-model="nombre" placeholder="Nombre" required />
+           <input type="text" 
+           class="form-control"
+            v-model="nombre" 
+            placeholder="Nombre" 
+            required />
           <label for="nombre">Nombre</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" v-model="descripcion" placeholder="Descripcion" required/>
+          <input type="text"
+           class="form-control"
+            v-model="descripcion"
+             placeholder="Descripcion"
+             required/>
           <label for="descripcion">Descripción</label>
         </div>
 
 
         <div class="form-floating">
-          <input type="text" class="form-control" v-model="precioUnitario" placeholder="PrecioUnitario" required />
+          <input type="text" 
+          class="form-control"
+           v-model="precioUnitario" 
+           placeholder="PrecioUnitario"
+           required />
           <label for="precioUnitario">Precio Unitario</label>
         </div>
 
         
         <div class="form-floating">
-          <input type="text" class="form-control" v-model="stock" placeholder="Stock" required  />
+          <input type="text" 
+          class="form-control"
+           v-model="stock"
+            placeholder="Stock" 
+            required  />
           <label for="stock">Stock</label>
         </div>
 
         <div class="text-center mt-3">
-          <button type="submit" class="btn btn-primary btn-lg">
-            <font-awesome-icon icon="fa-solid fa-save" /> Guardar
-          </button>
+          <button type="submit" class="btn btn-primary btn-lg"> Guardar </button>
         </div>
       </form>
     </div>

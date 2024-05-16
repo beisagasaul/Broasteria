@@ -9,8 +9,6 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-
-
     {
       path: '/productos',
       name: 'productos',
@@ -21,6 +19,21 @@ const router = createRouter({
      {
         path: 'editar/:id',
        component: () => import('../components/producto/ProductoEdit.vue')
+       }
+      ]
+    },
+
+
+    {
+      path: '/clientes',
+      name: 'clientes',
+      component: () => import('../views/ClienteView.vue'),
+      children: [
+      { path: '', component: () => import('../components/cliente/ClienteList.vue') },
+       { path: 'crear', component: () => import('../components/cliente/ClienteCreate.vue') },
+     {
+        path: 'editar/:id',
+       component: () => import('../components/cliente/ClienteEdit.vue')
        }
       ]
     },

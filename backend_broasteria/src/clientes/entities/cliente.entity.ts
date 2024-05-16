@@ -12,10 +12,10 @@ export class Cliente {
     @Column('varchar',{length:50,nullable:false})
     apellidos:string;
 
-    @Column('varchar',{length:30,nullable:false})
+    @Column('varchar',{length:50,nullable:false})
     direccion:string;
 
-    @Column()
+    @Column('varchar',{length:50,nullable:false})
     telefono:string;
 
     @Column({length:50,nullable:false})

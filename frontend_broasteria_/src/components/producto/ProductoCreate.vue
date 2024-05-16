@@ -15,7 +15,12 @@ const stock = ref('')
 
 async function crearProducto() {
   await http
-    .post(ENDPOINT, {nombre: nombre.value,descripcion: descripcion.value,precioUnitario:precioUnitario.value, stock:stock.value})
+    .post(ENDPOINT, {
+      nombre: nombre.value,
+      descripcion: descripcion.value,
+      precioUnitario:precioUnitario.value, 
+      stock:stock.value
+      })
     .then(() => router.push('/productos'))
 }
 
@@ -45,24 +50,40 @@ function goBack() {
       <form @submit.prevent="crearProducto">
 
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" v-model="nombre" placeholder="Nombre"  required />
+          <input type="text"
+           class="form-control"
+            v-model="nombre"
+             placeholder="Nombre" 
+              required />
           <label for="nombre">Nombre</label>
         </div>
 
 
         <div class="form-floating">
-          <input type="text" class="form-control" v-model="descripcion" placeholder="Descripcion" required/>
+          <input type="text"
+           class="form-control" 
+           v-model="descripcion" 
+           placeholder="Descripcion" 
+           required/>
           <label for="descripcion">Descripción</label>
         </div>
 
         <div class="form-floating">
-          <input type="text"class="form-control" v-model="precioUnitario" placeholder="PrecioUnitario" required/>
+          <input type="text"
+          class="form-control"
+           v-model="precioUnitario"
+            placeholder="PrecioUnitario" 
+            required/>
           <label for="precioUnitario">Precio Unitario</label>
         </div>
 
         
         <div class="form-floating">
-          <input type="text" class="form-control" v-model="stock" placeholder="Stock" required />
+          <input type="text" 
+          class="form-control"
+          v-model="stock"
+           placeholder="Stock" 
+           required />
           <label for="stock">Stock</label>
         </div>
 
