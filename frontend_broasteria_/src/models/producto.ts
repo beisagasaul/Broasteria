@@ -1,3 +1,4 @@
+import type { Categoria } from "./categoria";
 
 export interface Producto {
     id: number;
@@ -5,4 +6,5 @@ export interface Producto {
     descripcion: string;
     precioUnitario:number
     stock: number;
+    catagoria:Categoria;
   }
