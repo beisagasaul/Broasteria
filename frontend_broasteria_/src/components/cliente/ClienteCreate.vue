@@ -14,10 +14,10 @@ const direccion = ref('')
 const telefono = ref('')
 const email = ref('')
 
-async function crearInterprete() {
+async function crearCliente() {
   await http
     .post(ENDPOINT, { 
-      nombres: nombres.value,
+    nombres: nombres.value,
      apellidos: apellidos.value ,
      direccion:direccion.value,
      telefono:telefono.value,
@@ -106,19 +106,10 @@ function goBack() {
           <label for="email">Email</label>
         </div>
 
-
-
-
-
-
-
-
-
-
-
 		
         <div class="text-center mt-3">
-          <button type="submit" class="btn btn-primary btn-lg"> Crear </button>
+          <button type="submit" class="btn btn-primary btn-lg">
+            <font-awesome-icon icon="fa-solid fa-save"title="Guardar" /> </button>
         </div>
       </form>
     </div>

@@ -22,8 +22,8 @@ async function editarCliente() {
       nombres: nombres.value,
       apellidos: apellidos.value,
       direccion:direccion.value,
-       telefono:telefono.value,
-       email:email.value
+      telefono:telefono.value,
+      email:email.value
        })
 
     .then(() => router.push('/clientes'))
@@ -116,7 +116,8 @@ onMounted(() => {
 
 
         <div class="text-center mt-3">
-          <button type="submit" class="btn btn-primary btn-lg"> Guardar</button>
+          <button type="submit" class="btn btn-primary btn-lg"
+          > <font-awesome-icon icon="fa-solid fa-save" title="Guardar" /></button>
         </div>
       </form>
     </div>

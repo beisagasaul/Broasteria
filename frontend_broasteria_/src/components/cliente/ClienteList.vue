@@ -46,7 +46,8 @@ onMounted(() => {
     <div class="row">
       <h2>Lista de Clientes</h2>
       <div class="col-12">
-        <RouterLink to="/clientes/crear">Crear Nuevo</RouterLink>
+        <RouterLink to="/clientes/crear"
+        ><font-awesome-icon icon="fa-solid fa-plus" title="Crear Nuevo" /></RouterLink>
       </div>
     </div>
 
@@ -74,8 +75,14 @@ onMounted(() => {
             <td>{{ cliente. email }}</td>
 
             <td>
-              <button class="btn btn-link" @click="toEdit(cliente.id)">Editar</button>
-              <button class="btn btn-link" @click="toDelete(cliente.id)">Eliminar</button>
+              <button class="btn btn-link" @click="toEdit(cliente.id)">
+              <font-awesome-icon icon="fa-solid fa-edit" title="Editar" />
+              </button>
+
+
+
+              <button class="btn btn-link" @click="toDelete(cliente.id)"
+              ><font-awesome-icon icon="fa-solid fa-trash" title="Elimnar" /></button>
             </td>
 
           </tr>
