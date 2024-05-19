@@ -15,6 +15,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/categorias">Categorias</RouterLink>
         <RouterLink to="/productos">Productos</RouterLink>
         <RouterLink to="/clientes">Clientes</RouterLink>
+        <RouterLink to="/usuarios">Usuarios</RouterLink>
         <RouterLink to="/about">Acerca de</RouterLink>
       </nav>
     </div>
