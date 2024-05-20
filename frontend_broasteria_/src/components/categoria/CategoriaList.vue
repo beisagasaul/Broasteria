@@ -30,7 +30,7 @@ async function toDelete(id: number) {
 }
 
 onMounted(() => {
-  getCategorias()
+  getCategorias()    
 })
 </script>
 
