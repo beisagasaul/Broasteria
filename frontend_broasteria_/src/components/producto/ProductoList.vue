@@ -49,7 +49,8 @@ onMounted(() => {
     <div class="row">
       <h2>Lista de Productos</h2>
       <div class="col-12">
-        <RouterLink to="/productos/crear">Crear Nuevo</RouterLink>
+        <RouterLink to="/productos/crear"><font-awesome-icon icon="fa-solid fa-plus" title="Crear Nuevo"
+        /></RouterLink>
       </div>
     </div>
 
@@ -58,6 +59,7 @@ onMounted(() => {
         <thead>
           <tr>
             <th scope="col">N°</th>
+             <th scope="col">Categoria</th>
             <th scope="col">Nombre</th>
             <th scope="col">Descripción</th>
             <th scope="col">Precio Bs.</th>
@@ -69,14 +71,20 @@ onMounted(() => {
         <tbody>
           <tr v-for="(producto, index) in productos.values()" :key="producto.id">
             <th scope="row">{{ index + 1 }}</th>
+            <td>{{ producto.categoria.nombre }}</td>    <!--creacion de categoria  -->    
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.descripcion }}</td>
             <td>{{ producto.precioUnitario }}</td>
             <td>{{ producto.stock }}</td>
 
             <td>
-              <button class="btn btn-link" @click="toEdit(producto.id)">Editar</button>
-              <button class="btn btn-link" @click="toDelete(producto.id)">Eliminar</button>
+              <button class="btn btn-link" @click="toEdit(producto.id)">
+               <font-awesome-icon icon="fa-solid fa-edit" title="Editar" />
+              </button>
+
+              <button class="btn btn-link" @click="toDelete(producto.id)">
+               <font-awesome-icon icon="fa-solid fa-trash" title="Elimnar" />
+              </button>
             </td>
 
           </tr>

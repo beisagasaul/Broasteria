@@ -9,20 +9,21 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+    //CATEGORIA
     {
       path: '/categorias',
       name: 'categorias',
       component: () => import('../views/CategoriaView.vue'),
       children: [
-        { path: '', component: () => import('../components/categoria/CategoriaList.vue') }
-        //    { path: 'crear', component: () => import('../components/producto/ProductoCreate.vue') },
-        //  {
-        //     path: 'editar/:id',
-        //    component: () => import('../components/producto/ProductoEdit.vue')
-        //    }
+        { path: '', component: () => import('../components/categoria/CategoriaList.vue') },
+            { path: 'crear', component: () => import('../components/categoria/CategoriaCreate.vue') },
+          {
+            path: 'editar/:id',
+            component: () => import('../components/categoria/CategoriaEdit.vue')
+            }
       ]
     },
-
+     //PRODUCTO
     {
       path: '/productos',
       name: 'productos',
@@ -36,7 +37,7 @@ const router = createRouter({
         }
       ]
     },
-
+     //CLIENTE
     {
       path: '/clientes',
       name: 'clientes',
@@ -50,7 +51,7 @@ const router = createRouter({
         }
       ]
     },
-
+      //USUARIO
     {
       path: '/usuarios',
       name: 'usuarios',
@@ -64,7 +65,7 @@ const router = createRouter({
        }
       ]
     },
-    
+    //ACERCA DE
     {
       path: '/about',
       name: 'about',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Usuario } from '@/models/usuario' //hace referencia al modelo cliente
+import type { Usuario } from '@/models/usuario' //hace referencia al modelo USUARIO
 import { onMounted, ref } from 'vue'
 import http from '@/plugins/axios'
 import router from '@/router'
@@ -56,7 +56,7 @@ onMounted(() => {
         <thead>
           <tr>
             <th scope="col">N°</th>
-            <th scope="col">Nombres</th>
+            <th scope="col">Nombre</th>
             <th scope="col">Email</th>
             <th scope="col">Acciones</th>
           </tr>

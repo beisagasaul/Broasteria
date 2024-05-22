@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Cliente } from '@/models/categoria'   //hace referencia al modelo categroria 
-
+import type { Categoria } from '@/models/categoria'   //hace referencia al modelo categroria 
 import { onMounted, ref } from 'vue'  
 import http from '@/plugins/axios'
 import router from '@/router'
@@ -58,7 +57,6 @@ onMounted(() => {
           <tr>
             <th scope="col">N°</th>
             <th scope="col">Nombre</th>
-            
             <th scope="col">Acciones</th>
           </tr>
         </thead>

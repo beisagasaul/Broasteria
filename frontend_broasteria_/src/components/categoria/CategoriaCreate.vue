@@ -8,22 +8,14 @@ const props = defineProps<{
 }>()
 
 const ENDPOINT = props.ENDPOINT_API ?? ''
-const nombres = ref('')
-const apellidos = ref('')
-const direccion = ref('')
-const telefono = ref('')
-const email = ref('')
+const nombre = ref('')
 
-async function crearCliente() {
+async function crearCategoria() {
   await http
     .post(ENDPOINT, { 
-    nombres: nombres.value,
-     apellidos: apellidos.value ,
-     direccion:direccion.value,
-     telefono:telefono.value,
-     email:email.value
+    nombre: nombre.value,
      })
-    .then(() => router.push('/clientes'))
+    .then(() => router.push('/categorias'))
 }
 
 function goBack() {
@@ -37,79 +29,33 @@ function goBack() {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/clientes">Clientes</RouterLink>
+          <RouterLink to="/categorias">Categorias</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Crear</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nuevo Cliente</h2>
+      <h2>Crear Nueva Categoria</h2>
     </div>
 
     <div class="row">
 
-      <form @submit.prevent="crearCliente">
+      <form @submit.prevent="crearCategoria">
 
         <div class="form-floating mb-3">
           <input type="text" 
           class="form-control"
-           v-model="nombres" 
+           v-model="nombre" 
            placeholder="Nombre"
             required />
-          <label for="nombres">Nombre</label>
-        </div>
-
-
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            v-model="apellidos"
-            placeholder="Apellido"
-            required
-          />
-          <label for="apellidos">Apellido</label>
-        </div>
-
-
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            v-model="direccion"
-            placeholder="Direccion"
-            required
-          />
-          <label for="direccion">Direccion</label>
-        </div>
-
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            v-model="telefono"
-            placeholder="Telefono"
-            required
-          />
-          <label for="telefono">Telefono</label>
-        </div>
-
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            v-model="email"
-            placeholder="Email"
-            required
-          />
-          <label for="email">Email</label>
+          <label for="nombre">Nombre</label>
         </div>
 
 		
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">
-            <font-awesome-icon icon="fa-solid fa-save"title="Guardar" /> </button>
+            <font-awesome-icon icon="fa-solid fa-save" title="Guardar" /> </button>
         </div>
       </form>
     </div>

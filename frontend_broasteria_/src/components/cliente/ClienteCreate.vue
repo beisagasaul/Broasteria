@@ -109,7 +109,7 @@ function goBack() {
 		
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">
-            <font-awesome-icon icon="fa-solid fa-save"title="Guardar" /> </button>
+            <font-awesome-icon icon="fa-solid fa-save" title="Guardar" /> </button>
         </div>
       </form>
     </div>

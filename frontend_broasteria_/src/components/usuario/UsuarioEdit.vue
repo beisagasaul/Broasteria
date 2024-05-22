@@ -16,7 +16,7 @@ const id = router.currentRoute.value.params['id']
 async function editarUsuario() {
   await http
     .patch(`${ENDPOINT}/${id}`, {
-      nombres: nombreUsuario.value,
+      nombreUsuario: nombreUsuario.value,
       email: email.value
     })
 
@@ -45,7 +45,7 @@ onMounted(() => {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/interpretes">Usuario</RouterLink>
+          <RouterLink to="/usuarios">Usuario</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
@@ -58,14 +58,8 @@ onMounted(() => {
     <div class="row">
       <form @submit.prevent="editarUsuario">
         <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            v-model="nombreUsuario"
-            placeholder="Nombre"
-            required
-          />
-          <label for="nombreUsuario">Nombre</label>
+          <input type="text"  class="form-control" v-model="nombreUsuario" placeholder="Nombre de Usuario " required />
+          <label for="nombreUsuario">Nombre de Usuario</label>
         </div>
 
 

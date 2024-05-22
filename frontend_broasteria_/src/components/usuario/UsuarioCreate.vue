@@ -14,7 +14,7 @@ const email = ref('')
 async function crearUsuario() {
   await http
     .post(ENDPOINT, {
-      nombres: nombreUsuario.value,
+      nombreUsuario: nombreUsuario.value,
       email: email.value
     })
     .then(() => router.push('/usuarios'))
@@ -31,7 +31,7 @@ function goBack() {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/clientes">Usuarios</RouterLink>
+          <RouterLink to="/usuarios">Usuarios</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Crear</li>
       </ol>
@@ -44,14 +44,14 @@ function goBack() {
     <div class="row">
       <form @submit.prevent="crearUsuario">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" v-model="nombreUsuario" placeholder="Nombre" required />
-          <label for="nombres">Nombre</label>
+          <input type="text" class="form-control" v-model="nombreUsuario" placeholder="Nombre de Usuario" required />
+          <label for="nombreUsuario">Nombre de Usuario </label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" v-model="email" placeholder="Email" required />
-          <label for="email">Email</label>
-        </div>
+          <input type="text" class="form-control" v-model="email" placeholder="E-mail" required />
+          <label for="email">E-mail</label>
+        </div>   
 
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">

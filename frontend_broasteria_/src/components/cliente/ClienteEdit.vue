@@ -54,7 +54,7 @@ onMounted(() => {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/interpretes">Clientes</RouterLink>
+          <RouterLink to="/categorias">Clientes</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
