@@ -11,16 +11,14 @@ const props = defineProps<{
 const ENDPOINT = props.ENDPOINT_API ?? ''
 var clientes = ref<Cliente[]>([])
 
-//obtener
 async function getClientes() {
   clientes.value = await http.get(ENDPOINT).then((response) => response.data)
 }
 
-//editar
 function toEdit(id: number) {
   router.push(`/clientes/editar/${id}`)
 }
-//elimnar
+
 async function toDelete(id: number) {
   var r = confirm('¿Está seguro que se desea eliminar el Cliente?')
   if (r == true) {

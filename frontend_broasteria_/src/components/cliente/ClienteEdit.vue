@@ -31,7 +31,7 @@ async function editarCliente() {
 
 async function getCliente() {
   await http.get(`${ENDPOINT}/${id}`).then((response) => {
-    ;(nombres.value = response.data.nombres),
+     (nombres.value = response.data.nombres),
      (apellidos.value = response.data.apellidos),
      (direccion.value=response.data.direccion), 
      ( telefono.value = response.data. telefono), 

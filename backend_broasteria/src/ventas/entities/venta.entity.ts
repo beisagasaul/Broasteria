@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -18,13 +17,7 @@ export class Venta {
   id: number;
 
   @Column('varchar', { length: 50, nullable: false })
-  fecha: string;
-
-  @Column('varchar', { length: 50, nullable: false })
   totalVenta: string;
-
-  @Column()
-  estado: boolean;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
@@ -33,10 +26,13 @@ export class Venta {
   fechaModificacion: Date;
 
   //  muchas ventas puede realizar  un cliente
-  @ManyToOne(() => Cliente, cliente => cliente.ventas)
+  @ManyToOne(() => Cliente, (cliente) => cliente.ventas)
   @JoinColumn({ name: 'idCliente', referencedColumnName: 'id' })
-  cliente: Cliente; 
+  cliente: Cliente;
+
+
+
   //una venta puede tener varios detalles de venta
-  @OneToMany(()=>Ventadetalle,ventadetalle=>ventadetalle.venta)
-  ventadetalles:Ventadetalle[];
+  @OneToMany(() => Ventadetalle, (ventadetalle) => ventadetalle.venta)
+  ventadetalles: Ventadetalle[];
 }

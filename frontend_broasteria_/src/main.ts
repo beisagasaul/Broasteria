@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import './assets/main.css'
+import './assets/main.css';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPlus, faEdit, faTrash, faSave } from '@fortawesome/free-solid-svg-icons'
 
 import App from './App.vue';
-import router from './router'
-
+import router from './router';
 
 const app = createApp(App)
 library.add(faPlus, faEdit, faTrash, faSave)

@@ -92,7 +92,7 @@ function goBack() {
             placeholder="Telefono"
             required
           />
-          <label for="telefono">Telefono</label>
+          <label for="telefono">Teléfono</label>
         </div>
 
         <div class="form-floating">
@@ -103,7 +103,7 @@ function goBack() {
             placeholder="Email"
             required
           />
-          <label for="email">Email</label>
+          <label for="email">E-mail</label>
         </div>
 
 		

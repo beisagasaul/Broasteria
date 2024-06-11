@@ -7,18 +7,14 @@ export class Producto {
     @PrimaryGeneratedColumn() 
     id: number;
 
-
     @Column('varchar', { length: 50, nullable: false })
     nombre: string;
-
-
 
     @Column('varchar', { length: 200, nullable: false })
     descripcion: string;
 
     @Column({name:'precio_unitario'})
     precioUnitario:number;
-
 
     @Column()
     stock: number;

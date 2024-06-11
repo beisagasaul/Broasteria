@@ -2,21 +2,29 @@
 import { ref } from "vue";
 import http from "@/plugins/axios";
 import router from "@/router";
+import type { Venta } from '@/models/venta'
+import type { Cliente } from '@/models/cliente'
 
 const props = defineProps<{
   ENDPOINT_API: string;
 }>();
 
 const ENDPOINT = props.ENDPOINT_API ?? "";
-const nombre = ref("");
+const venta = ref<Venta[]>({} as Venta);
+const clientes = ref<Cliente[]>([])
 
-async function crearCategoria() {
+async function crearVenta() {
   await http
     .post(ENDPOINT, {
-      nombre: nombre.value,
+      idCliente: venta.value.cliente.id,
+      totalVenta: venta.value.totalVenta
     })
-    .then(() => router.push("/categorias"));
+    .then(() => router.push("/ventas"));
 }
+
+onMounted(async () => {
+  clientes.value = await http.get('clientes').then((res) => res.data)
+})
 
 function goBack() {
   router.go(-1);
@@ -29,27 +37,41 @@ function goBack() {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/categorias">Categorias</RouterLink>
+          <RouterLink to="/ventas">Ventas</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Crear</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nueva Categoria</h2>
+      <h2>Crear Nueva Venta</h2>
     </div>
 
     <div class="row">
-      <form @submit.prevent="crearCategoria">
+      <form @submit.prevent="crearVenta">
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            v-model="venta.cliente"
+            placeholder="TotalVenta"
+            required
+          />
+          <option value="":disabled="true">Seleccione un elemento</option>
+          <option v-for="cliente in clientes" :key="cliente.id" value="cliente">
+            {{ cliente.nombres }}
+          </option>
+          <label for="totalVenta">Total de Venta</label>
+        </div>
+
         <div class="form-floating mb-3">
           <input
             type="text"
             class="form-control"
-            v-model="nombre"
-            placeholder="Nombre"
+            v-model="venta.totalVenta"
+            placeholder="TotalVenta"
             required
           />
-          <label for="nombre">Nombre</label>
+          <label for="totalVenta">Total de Venta</label>
         </div>
 
         <div class="text-center mt-3">

@@ -15,8 +15,6 @@ export class VentadetallesService {
 
   async create(createVentadetalleDto: CreateVentadetalleDto):Promise<Ventadetalle> {
     const existe=await this.ventadetallesRepository.findOneBy({
-      cantidad:createVentadetalleDto.cantidad,
-      subtotal:createVentadetalleDto.subtotal,
       venta:{id:createVentadetalleDto.idVenta},
       producto:{id:createVentadetalleDto.idProducto}
     });
@@ -24,8 +22,8 @@ export class VentadetallesService {
       throw new ConflictException(`El venta de detalle ya existe`);
     }
     return this.ventadetallesRepository.save({
-      cantidad:createVentadetalleDto.cantidad,
-      subtotal:createVentadetalleDto.subtotal,
+      cantidad:createVentadetalleDto.cantidad.trim(),
+      subtotal:createVentadetalleDto.subtotal.trim(),
       venta:{id:createVentadetalleDto.idVenta},
       producto:{id:createVentadetalleDto.idProducto}
     });

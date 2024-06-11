@@ -11,16 +11,14 @@ const props = defineProps<{
 const ENDPOINT = props.ENDPOINT_API ?? ''
 var usuarios = ref<Usuario[]>([])
 
-//obtener
 async function getUsuarios() {
   usuarios.value = await http.get(ENDPOINT).then((response) => response.data)
 }
 
-//editar
 function toEdit(id: number) {
   router.push(`/usuarios/editar/${id}`)
 }
-//elimnar
+
 async function toDelete(id: number) {
   var r = confirm('¿Está seguro que se desea eliminar el Usuario?')
   if (r == true) {

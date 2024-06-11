@@ -6,3 +6,5 @@ const axios = Axios.create({
 })
 
 export default axios 
+
+//haciendo la importancion de axios ,importando la variable de entorno

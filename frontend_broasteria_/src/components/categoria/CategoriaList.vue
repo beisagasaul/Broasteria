@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Categoria } from '@/models/categoria'   //hace referencia al modelo categroria 
+import type { Categoria } from '@/models/categoria'    
 import { onMounted, ref } from 'vue'  
 import http from '@/plugins/axios'
 import router from '@/router'
@@ -11,16 +11,16 @@ const props = defineProps<{
 const ENDPOINT = props.ENDPOINT_API ?? ''
 var categorias = ref<Categoria[]>([])
 
-//obtener
+
 async function getCategorias() {
   categorias.value = await http.get(ENDPOINT).then((response) => response.data)
 }
 
-//editar
+
 function toEdit(id: number) {
   router.push(`/categorias/editar/${id}`)
 }
-//elimnar
+
 async function toDelete(id: number) {
   var r = confirm('¿Está seguro que se desea eliminar la Categoria?')
   if (r == true) {

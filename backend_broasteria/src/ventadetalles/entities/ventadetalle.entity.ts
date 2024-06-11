@@ -6,10 +6,10 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 export class Ventadetalle {
     @PrimaryGeneratedColumn()
     id:number;
-    @Column()
-    cantidad:number;
-    @Column()
-    subtotal:number
+    @Column('varchar',{length:50,nullable:false})
+    cantidad:string;
+    @Column('varchar',{length:50,nullable:false})
+    subtotal:string;
     //idVenta
     //varios ventaDetalle pueden tener una venta (M a 1) 
     @ManyToOne(()=>Venta,venta=>venta.ventadetalles)

@@ -19,7 +19,7 @@ export class Empleado {
     @Column()
     salario: number;
 
-    @Column('varchar', { length: 20, nullable: false, name: 'fecha_contratacion' })
+    @Column({type:'date',  name: 'fecha_contratacion' })
     fechaContratacion: Date;
 
     @CreateDateColumn({ name: 'fecha_creacion' })

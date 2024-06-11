@@ -8,39 +8,42 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class ClientesService {
   constructor(
-    @InjectRepository(Cliente) private clientesRepository: Repository<Cliente>,) {}
+    @InjectRepository(Cliente) private clientesRepository: Repository<Cliente>,) { }
 
 
-  async create(createClienteDto: CreateClienteDto):Promise<Cliente> {
-    const existe=await this.clientesRepository.findOneBy({
-      nombres:createClienteDto.nombres.trim(),
+  async create(createClienteDto: CreateClienteDto): Promise<Cliente> {
+    const existe = await this.clientesRepository.findOneBy({
+      nombres: createClienteDto.nombres.trim(),
     })
-    if(existe){
-     
+    if (existe) {
+
       throw new ConflictException(`ya existe el campo`)
-    }
+    };
     return this.clientesRepository.save({
       nombres:createClienteDto.nombres.trim(),
       apellidos:createClienteDto.apellidos.trim(),
       direccion:createClienteDto.direccion.trim(),
       telefono:createClienteDto.telefono.trim(),
       email:createClienteDto.email.trim()
-    });
+   
+
+    })
+   
   }
 
-  async findAll():Promise<Cliente[]> {
+  async findAll(): Promise<Cliente[]> {
     return await this.clientesRepository.find();
   }
 
-  async findOne(id: number):Promise<Cliente> {
-    const existe=await this.clientesRepository.findOneBy({id})
-    if(!existe){
+  async findOne(id: number): Promise<Cliente> {
+    const existe = await this.clientesRepository.findOneBy({ id })
+    if (!existe) {
       throw new NotFoundException(`el cliente con el id ${id} no existe`)
     }
     return existe;
   }
 
-  async update(id: number, updateClienteDto: UpdateClienteDto):Promise<Cliente> {
+  async update(id: number, updateClienteDto: UpdateClienteDto): Promise<Cliente> {
     const cliente = await this.findOne(id);
     const actualizaCliente = Object.assign(cliente, updateClienteDto);
     return this, this.clientesRepository.save(actualizaCliente);

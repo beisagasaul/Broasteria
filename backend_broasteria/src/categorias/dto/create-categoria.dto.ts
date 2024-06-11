@@ -6,6 +6,6 @@ export class CreateCategoriaDto {
     @IsNotEmpty({ message: 'El campo nombre no debe ser vacío' })
     @IsString({ message: 'El campo nombre debe ser de tipo cadena' })
     @MaxLength(50, { message: 'El campo nombre no debe ser nemor a 50 caracteres' })
-    @MinLength(4, { message: 'El campo nombre no debe ser mayor a 4 caracteres' })
+    @MinLength(2, { message: 'El campo nombre no debe ser mayor a 4 caracteres' })
     readonly nombre:string;
 }

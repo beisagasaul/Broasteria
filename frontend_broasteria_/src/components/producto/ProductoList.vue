@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Producto } from '@/models/producto'   //hace referencia al modelo producto 
-import { onMounted, ref } from 'vue'  
+import type { Producto } from '@/models/producto'
+import { onMounted, ref } from 'vue'
 import http from '@/plugins/axios'
 import router from '@/router'
 
@@ -11,18 +11,16 @@ const props = defineProps<{
 const ENDPOINT = props.ENDPOINT_API ?? ''
 var productos = ref<Producto[]>([])
 
-//obtener
 async function getProductos() {
   productos.value = await http.get(ENDPOINT).then((response) => response.data)
 }
 
-//editar
 function toEdit(id: number) {
   router.push(`/productos/editar/${id}`)
 }
-//elimnar
+
 async function toDelete(id: number) {
-  var r = confirm('¿Está seguro que se desea eliminar el Producto?')
+  var r = confirm('¿Está seguro que se desea eliminar el producto?')
   if (r == true) {
     await http.delete(`${ENDPOINT}/${id}`).then(() => getProductos())
   }
@@ -32,10 +30,6 @@ onMounted(() => {
   getProductos()
 })
 </script>
-
-
-
-
 
 <template>
   <div class="container">
@@ -49,8 +43,9 @@ onMounted(() => {
     <div class="row">
       <h2>Lista de Productos</h2>
       <div class="col-12">
-        <RouterLink to="/productos/crear"><font-awesome-icon icon="fa-solid fa-plus" title="Crear Nuevo"
-        /></RouterLink>
+        <RouterLink to="/productos/crear"
+          ><font-awesome-icon icon="fa-solid fa-plus" /> Crear Nuevo</RouterLink
+        >
       </div>
     </div>
 
@@ -59,44 +54,36 @@ onMounted(() => {
         <thead>
           <tr>
             <th scope="col">N°</th>
-             <th scope="col">Categoria</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Precio Bs.</th>
-             <th scope="col">Stock</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">stock</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
-        
         <tbody>
           <tr v-for="(producto, index) in productos.values()" :key="producto.id">
             <th scope="row">{{ index + 1 }}</th>
-            <td>{{ producto.categoria.nombre }}</td>    <!--creacion de categoria  -->    
-            <td>{{ producto.nombre }}</td>
-            <td>{{ producto.descripcion }}</td>
-            <td>{{ producto.precioUnitario }}</td>
-            <td>{{ producto.stock }}</td>
-
+            <td>{{producto.categoria.nombre }}</td>
+            <td>{{producto.nombre }}</td>
+            <td>{{producto.descripcion }}</td>
+            <td>{{producto.precioUnitario }}</td>
+            <td>{{producto.stock }}</td>
+          
             <td>
               <button class="btn btn-link" @click="toEdit(producto.id)">
-               <font-awesome-icon icon="fa-solid fa-edit" title="Editar" />
+                <font-awesome-icon icon="fa-solid fa-edit" />
               </button>
-
               <button class="btn btn-link" @click="toDelete(producto.id)">
-               <font-awesome-icon icon="fa-solid fa-trash" title="Elimnar" />
+                <font-awesome-icon icon="fa-solid fa-trash" />
               </button>
             </td>
-
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </template>
-
-
-
-
-
 
 <style scoped></style>

@@ -9,6 +9,39 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+
+    //VENTA DETALLE
+    {
+      path: '/ventadetalles',
+      name: 'ventadetalles',
+      component: () => import('../views/VentadetalleView.vue'),
+      children: [
+        { path: '', component: () => import('../components/ventadetalle/VentadetalleList.vue') },
+        {
+          path: 'crear',
+          component: () => import('../components/ventadetalle/VentadetalleCreate.vue')
+        },
+        // {
+        //   path: 'editar/:id',
+        //   component: () => import('../components/ventadetalle/VentadetalleEdit.vue')
+        // }
+      ]
+    },
+    //VENTA
+    {
+      path: '/ventas',
+      name: 'ventas',
+      component: () => import('../views/VentaView.vue'),
+      children: [
+        { path: '', component: () => import('../components/venta/VentaList.vue') },
+        { path: 'crear', component: () => import('../components/venta/VentaCreate.vue') },
+        // {
+        //   path: 'editar/:id',
+        //   component: () => import('../components/venta/VentaEdit.vue')
+        // }
+      ]
+    },
+
     //CATEGORIA
     {
       path: '/categorias',
@@ -16,14 +49,14 @@ const router = createRouter({
       component: () => import('../views/CategoriaView.vue'),
       children: [
         { path: '', component: () => import('../components/categoria/CategoriaList.vue') },
-            { path: 'crear', component: () => import('../components/categoria/CategoriaCreate.vue') },
-          {
-            path: 'editar/:id',
-            component: () => import('../components/categoria/CategoriaEdit.vue')
-            }
+        { path: 'crear', component: () => import('../components/categoria/CategoriaCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/categoria/CategoriaEdit.vue')
+        }
       ]
     },
-     //PRODUCTO
+    //PRODUCTO
     {
       path: '/productos',
       name: 'productos',
@@ -31,13 +64,13 @@ const router = createRouter({
       children: [
         { path: '', component: () => import('../components/producto/ProductoList.vue') },
         { path: 'crear', component: () => import('../components/producto/ProductoCreate.vue') },
-        {
-          path: 'editar/:id',
-          component: () => import('../components/producto/ProductoEdit.vue')
-        }
+        // {
+        //   path: 'editar/:id',
+        //   component: () => import('../components/producto/ProductoEdit.vue')
+        // }
       ]
     },
-     //CLIENTE
+    //CLIENTE
     {
       path: '/clientes',
       name: 'clientes',
@@ -51,18 +84,33 @@ const router = createRouter({
         }
       ]
     },
-      //USUARIO
+    //USUARIO
     {
       path: '/usuarios',
       name: 'usuarios',
       component: () => import('../views/UsuarioView.vue'),
       children: [
-      { path: '', component: () => import('../components/usuario/UsuarioList.vue') },
-       { path: 'crear', component: () => import('../components/usuario/UsuarioCreate.vue') },
+        { path: '', component: () => import('../components/usuario/UsuarioList.vue') },
+        { path: 'crear', component: () => import('../components/usuario/UsuarioCreate.vue') },
+        {
+          path: 'editar/:id',
+          component: () => import('../components/usuario/UsuarioEdit.vue')
+        }
+      ]
+    },
+
+     //EMPLEADO
      {
-        path: 'editar/:id',
-       component: () => import('../components/usuario/UsuarioEdit.vue')
-       }
+      path: '/empleados',
+      name: 'empleados',
+      component: () => import('../views/EmpleadoView.vue'),
+      children: [
+        { path: '', component: () => import('../components/empleado/EmpleadoList.vue') },
+         { path: 'crear', component: () => import('../components/empleado/EmpleadoCreate.vue') },
+        // {
+        //   path: 'editar/:id',
+        //   component: () => import('../components/empleado/EmpleadoEdit.vue')
+        // }
       ]
     },
     //ACERCA DE

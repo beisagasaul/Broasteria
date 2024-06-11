@@ -44,7 +44,7 @@ export class CreateEmpleadoDto {
     fechaModificacion: Date;
 
     @ApiProperty()
-    @IsDefined({ message: 'El campo iUsuario debe estar definido' })
+    @IsDefined({ message: 'El campo idUsuario debe estar definido' })
     @IsNumber({}, { message: 'El campo idUsuario debe ser de tipo numérico' })
     readonly idUsuario: number;
     

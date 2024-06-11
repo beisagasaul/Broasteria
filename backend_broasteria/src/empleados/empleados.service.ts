@@ -36,7 +36,7 @@ export class EmpleadosService {
   async findOne(id: number): Promise<Empleado> {
     const existeEmpleado = await this.empleadosRepository.findOne({
       where: { id },
-      relations: ['usuario']
+      relations: ['usuario'] 
 
     })
     if (!existeEmpleado) {
