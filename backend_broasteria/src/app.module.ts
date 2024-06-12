@@ -10,6 +10,7 @@ import { ClientesModule } from './clientes/clientes.module';
 import { VentasModule } from './ventas/ventas.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { VentadetallesModule } from './ventadetalles/ventadetalles.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -32,7 +33,8 @@ import { VentadetallesModule } from './ventadetalles/ventadetalles.module';
     ClientesModule,
     VentasModule,
     UsuariosModule,
-    VentadetallesModule 
+    VentadetallesModule,
+    AuthModule 
 
    
   ],

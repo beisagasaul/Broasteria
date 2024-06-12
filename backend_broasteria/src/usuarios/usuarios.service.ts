@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -50,6 +50,20 @@ export class UsuariosService {
     return this.usuariosRepository.delete(usuario.id);
   }
 
- 
+  async validate(nombreUsuario: string, clave: string): Promise<Usuario> {
+    const usuarioOk = await this.usuariosRepository.findOne({
+      where: { nombreUsuario },
+      select: ['id', 'nombreUsuario', 'clave', 'email'],
+    });
+
+    if (!usuarioOk) throw new NotFoundException('Usuario inexistente');
+
+    if (!(await usuarioOk?.validatePassword(clave))) {
+      throw new UnauthorizedException('Clave incorrecta');
+    }
+
+    delete usuarioOk.clave;
+    return usuarioOk;
+  }
 
 }

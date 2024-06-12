@@ -1,10 +1,14 @@
 
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, ConflictException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, ConflictException, UseGuards } from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @ApiTags('productos')
 @Controller('productos')
 export class ProductosController {

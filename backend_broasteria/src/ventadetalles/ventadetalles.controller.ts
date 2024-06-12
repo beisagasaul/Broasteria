@@ -1,8 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ConflictException, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ConflictException, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { VentadetallesService } from './ventadetalles.service';
 import { CreateVentadetalleDto } from './dto/create-ventadetalle.dto';
 import { UpdateVentadetalleDto } from './dto/update-ventadetalle.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @ApiTags(' detalles de venta')
 @Controller('ventadetalles')
 export class VentadetallesController {

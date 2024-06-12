@@ -15,6 +15,7 @@ async function bootstrap() {
     .setDescription('Backend de una broasteria')
     .setVersion('1.0')
     .addTag('categorias,empleados,productos,clientes,usuarios,ventas,detalle de venta')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidocumentation', app, document);
