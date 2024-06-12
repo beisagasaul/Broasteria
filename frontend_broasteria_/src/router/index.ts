@@ -35,10 +35,10 @@ const router = createRouter({
       children: [
         { path: '', component: () => import('../components/venta/VentaList.vue') },
         { path: 'crear', component: () => import('../components/venta/VentaCreate.vue') },
-        // {
-        //   path: 'editar/:id',
-        //   component: () => import('../components/venta/VentaEdit.vue')
-        // }
+         {
+          path: 'editar/:id',
+          component: () => import('../components/venta/VentaEdit.vue')
+         }
       ]
     },
 
@@ -64,10 +64,10 @@ const router = createRouter({
       children: [
         { path: '', component: () => import('../components/producto/ProductoList.vue') },
         { path: 'crear', component: () => import('../components/producto/ProductoCreate.vue') },
-        // {
-        //   path: 'editar/:id',
-        //   component: () => import('../components/producto/ProductoEdit.vue')
-        // }
+         {
+          path: 'editar/:id',
+          component: () => import('../components/producto/ProductoEdit.vue')
+          }
       ]
     },
     //CLIENTE

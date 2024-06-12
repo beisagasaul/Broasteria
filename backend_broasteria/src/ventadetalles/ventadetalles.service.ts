@@ -14,19 +14,25 @@ export class VentadetallesService {
 
 
   async create(createVentadetalleDto: CreateVentadetalleDto):Promise<Ventadetalle> {
-    const existe=await this.ventadetallesRepository.findOneBy({
-      venta:{id:createVentadetalleDto.idVenta},
-      producto:{id:createVentadetalleDto.idProducto}
+    const existe=await this.ventadetallesRepository.findOne({
+      where:{
+        venta:{id:createVentadetalleDto.idVenta},
+        producto:{id:createVentadetalleDto.idProducto}
+      },
+      relations:['venta','producto']
+     
     });
     if(existe){
       throw new ConflictException(`El venta de detalle ya existe`);
     }
-    return this.ventadetallesRepository.save({
+    const ventadetalle=this.ventadetallesRepository.create({
       cantidad:createVentadetalleDto.cantidad.trim(),
       subtotal:createVentadetalleDto.subtotal.trim(),
       venta:{id:createVentadetalleDto.idVenta},
       producto:{id:createVentadetalleDto.idProducto}
+
     });
+    return this.ventadetallesRepository.save(ventadetalle)
   }
 
   async findAll():Promise<Ventadetalle[]> {
@@ -46,6 +52,9 @@ export class VentadetallesService {
 
   async update(id: number, updateVentadetalleDto: UpdateVentadetalleDto) :Promise<Ventadetalle>{
     const ventadetalle=await this.findOne(id);
+    if (!ventadetalle) {
+      throw new NotFoundException(`La venta de  detalle con el id ${id} no existe`);
+    }
     const actuvd=Object.assign(ventadetalle,updateVentadetalleDto);
     actuvd.venta={id:updateVentadetalleDto.idVenta} as Venta;
     actuvd.producto={id:updateVentadetalleDto.idProducto}as Producto;
@@ -53,7 +62,10 @@ export class VentadetallesService {
   }
 
   async remove(id: number) {
-    const ventadetalle=await this.findOne(id)
+    const ventadetalle=await this.findOne(id);
+    if (!ventadetalle) {
+      throw new NotFoundException(`La venta de  detalle con el id ${id} no existe`);
+    }
     return this.ventadetallesRepository.delete(ventadetalle.id);
   }
 }

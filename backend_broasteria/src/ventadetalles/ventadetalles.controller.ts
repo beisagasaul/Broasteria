@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ConflictException, HttpException, HttpStatus } from '@nestjs/common';
 import { VentadetallesService } from './ventadetalles.service';
 import { CreateVentadetalleDto } from './dto/create-ventadetalle.dto';
 import { UpdateVentadetalleDto } from './dto/update-ventadetalle.dto';
@@ -6,11 +6,26 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags(' detalles de venta')
 @Controller('ventadetalles')
 export class VentadetallesController {
-  constructor(private readonly ventadetallesService: VentadetallesService) {}
+  constructor(private readonly ventadetallesService: VentadetallesService) { }
 
   @Post()
-  create(@Body() createVentadetalleDto: CreateVentadetalleDto) {
-    return this.ventadetallesService.create(createVentadetalleDto);
+  async create(@Body() createVentadetalleDto: CreateVentadetalleDto) {
+    try {
+      return await this.ventadetallesService.create(createVentadetalleDto);
+    } catch (error) {
+      if (error instanceof ConflictException) {
+        throw new HttpException({
+          status: HttpStatus.CONFLICT,
+          error: 'La venta de detalle ya existe',
+        }, HttpStatus.CONFLICT);
+      }
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Error al crear venta de detalle',
+      }, HttpStatus.BAD_REQUEST);
+    }
+
+
   }
 
   @Get()

@@ -1,32 +1,63 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import http from "@/plugins/axios";
-import router from "@/router";
-import type { Empleado } from "@/models/empleado";
-import type { Usuario } from "@/models/usuario";
+import { ref, onMounted } from 'vue';
+import http from '@/plugins/axios';
+import router from '@/router';
+import type { Empleado } from '@/models/empleado';
+import type { Usuario } from '@/models/usuario';
 
 const props = defineProps<{
   ENDPOINT_API: string;
 }>();
 
 const ENDPOINT = props.ENDPOINT_API ?? "";
-const empleado = ref<Empleado>({} as Empleado);
-const usuario = ref<Usuario[]>([]);
+
+const empleado = ref<Empleado>({
+  id: 0,
+  nombres: '',
+
+  apellidos:'',
+
+  cargo: '',
+
+  salario:0,
+
+  fechaContratacion: new Date(),
+
+  usuario: {
+    id: 0,
+    nombreUsuario: '',
+  },
+});
+
+const usuarios = ref<Usuario[]>([]);
 
 async function crearEmpleado() {
-  await http
-    .post(ENDPOINT, {
+  try {
+    await http.post(ENDPOINT, {
       idUsuario: empleado.value.usuario.id,
       nombres: empleado.value.nombres,
       apellidos: empleado.value.apellidos,
       cargo: empleado.value.cargo,
       salario: empleado.value.salario,
-      fechaContratacion: empleado.value.fechaContratacion,
-    })
-    .then(() => router.push("/empleados"));
+      fechaContratacion: empleado.value.fechaContratacion
+    });
+    router.push('/empleados');
+  } catch (error) {
+    console.error('Error al crear el empleado:', error);
+  }
 }
-onMounted(async () => {
-  usuarios.value = await http.get("usuarios").then((res) => res.data);
+
+async function getUsuarios() {
+  try {
+    const response = await http.get('usuarios');
+    usuarios.value = response.data;
+  } catch (error) {
+    console.error('Error al obtener las usuarios:', error);
+  }
+}
+
+onMounted(() => {
+  getUsuarios();
 });
 
 function goBack() {
@@ -35,41 +66,46 @@ function goBack() {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" v-if="empleado && empleado.usuario">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/empleados">Empleados</RouterLink>
+          <RouterLink to="/usuarios">Empleados</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Crear</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nuevo Empleado</h2>
+      <h2>Crear Nuevo Usuario</h2>
     </div>
 
     <div class="row">
       <form @submit.prevent="crearEmpleado">
-        <div class="form-floating mb-2">
-          <select class="form-select" v-model="empleado.usuario" required />
-          <option value="" :disabled="false">Seleccione un elemento</option>
-          <option v-for="usuario in usuarios" :key="usuario.id" value="usuario">
-            {{ usuario.nombreUsuario }}
-          </option>
+        <div class="form-floating mb-3">
+          <select 
+          class="form-select" 
+          v-model="empleado.usuario" 
+          required
+          >
+            <option value="" disabled>Seleccione un usuario</option>
+            <option v-for="usuario in usuarios" :key="usuario.id" :value="usuario">
+              {{ usuario.nombreUsuario }}
+            </option>
+          </select>
           <label for="usuario">Usuario</label>
         </div>
 
-        <div class="form-floating mb-2">
+        <div class="form-floating mb-3">
           <input
             type="text"
             class="form-control"
             v-model="empleado.nombres"
-            placeholder="Nombre"
+            placeholder="Nombres"
             required
           />
-          <label for="nombres">Nombre</label>
+          <label for="nombres">Nombres</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -77,10 +113,10 @@ function goBack() {
             type="text"
             class="form-control"
             v-model="empleado.apellidos"
-            placeholder="Apellido"
+            placeholder="Apellidos"
             required
           />
-          <label for="apellidos">Apellido</label>
+          <label for="apellidos">Apellidos</label>
         </div>
 
         <div class="form-floating mb-2">
@@ -96,7 +132,7 @@ function goBack() {
 
         <div class="form-floating mb-2">
           <input
-            type="text"
+            type="number"
             class="form-control"
             v-model="empleado.salario"
             placeholder="Salario"
@@ -105,21 +141,20 @@ function goBack() {
           <label for="salario">Salario</label>
         </div>
 
-        <div class="form-floating mb-2">
-          <input
-            type="text"
-            class="form-control"
-            v-model="empleado.fechaContratacion"
-            placeholder="Fecha de Contratación"
-            required
-          />
-          <label for="fechaContratacion">Fecha de contratacion</label>
-        </div>
-        
+      <div class="form-floating mb-2">
+        <input
+          type="date"
+          class="form-control"
+          v-model="empleado.fechaContratacion"
+          placeholder="Fecha de Contratación"
+          required
+        />
+        <label for="fechaContratacion">Fecha de Contratación</label>
+      </div>
 
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">
-            <font-awesome-icon icon="fa-solid fa-save" /> Crear
+            <font-awesome-icon icon="fa-solid fa-save" title="Guardar" />
           </button>
         </div>
       </form>
@@ -130,4 +165,12 @@ function goBack() {
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.container {
+  padding: 20px;
+}
+
+button {
+  margin-top: 10px;
+}
+</style>
