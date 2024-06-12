@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import http from '@/plugins/axios';
-import router from '@/router';
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router';
+import http from "@/plugins/axios";
 import type { Producto } from '@/models/producto';
 import type { Categoria } from '@/models/categoria';
+
+const route = useRoute();
+const router = useRouter();
 
 const props = defineProps<{
   ENDPOINT_API: string;
@@ -25,18 +28,27 @@ const producto = ref<Producto>({
 
 const categorias = ref<Categoria[]>([]);
 
-async function crearProducto() {
+async function cargarProducto() {
   try {
-    await http.post(ENDPOINT, {
-      idCategoria: producto.value.categoria.id,
-      nombre: producto.value.nombre,
-      descripcion: producto.value.descripcion,
-      precioUnitario: producto.value.precioUnitario,
-      stock: producto.value.stock
-    });
-    router.push('/productos');
+    const response = await http.get(`${ENDPOINT}/${route.params.id}`);
+    producto.value = response.data;
   } catch (error) {
-    console.error('Error al crear el producto:', error);
+    console.error("Error al cargar el producto:", error);
+  }
+}
+
+async function actualizarProducto() {
+  try {
+    await http.patch(`${ENDPOINT}/${venta.value.id}`, {
+     idCategoria: producto.value.categoria.id,
+     nombre: producto.value.nombre,
+     descripcion: producto.value.descripcion,
+     precioUnitario: producto.value.precioUnitario,
+     stock: producto.value.stock
+    });
+    router.push("/productos");
+  } catch (error) {
+    console.error("Error al actualizar el prducto:", error);
   }
 }
 
@@ -45,12 +57,13 @@ async function getCategorias() {
     const response = await http.get('categorias');
     categorias.value = response.data;
   } catch (error) {
-    console.error('Error al obtener las categorías:', error);
+    console.error("Error al obtener los categorias:", error);
   }
 }
 
 onMounted(() => {
   getCategorias();
+  cargarProducto();
 });
 
 function goBack() {
@@ -59,38 +72,38 @@ function goBack() {
 </script>
 
 <template>
-  <div class="container" v-if="producto && producto.categoria">
+  <div class="container" v-if="venta && venta.cliente">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/productos">Productos</RouterLink>
+          <RouterLink to="/ventas">Ventas</RouterLink>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nuevo Producto</h2>
+      <h2>Editar Venta</h2>
     </div>
 
     <div class="row">
-      <form @submit.prevent="crearProducto">
+      <form @submit.prevent="actualizarProducto">
         <div class="form-floating mb-3">
-          <select 
-          class="form-select" 
-          v-model="producto.categoria" 
-          required
+          <select
+            class="form-select"
+            v-model="producto.categoria"
+            required
           >
-            <option value="" disabled>Seleccione una categoría</option>
+            <option value="" disabled>Seleccione una categoria</option>
             <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
               {{ categoria.nombre }}
             </option>
           </select>
-          <label for="categoria">Categoría</label>
+          <label for="categoria">Categoria</label>
         </div>
 
-        <div class="form-floating mb-3">
+       <div class="form-floating mb-3">
           <input
             type="text"
             class="form-control"
@@ -133,7 +146,7 @@ function goBack() {
           />
           <label for="stock">Stock</label>
         </div>
-
+        
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">
             <font-awesome-icon icon="fa-solid fa-save" title="Guardar" />

@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 import http from "@/plugins/axios";
-import router from "@/router";
 import type { Venta } from '@/models/venta';
 import type { Cliente } from '@/models/cliente';
+
+const route = useRoute();
+const router = useRouter();
 
 const props = defineProps<{
   ENDPOINT_API: string;
 }>();
 
 const ENDPOINT = props.ENDPOINT_API ?? "";
-
 const venta = ref<Venta>({
   id: 0,
   totalVenta: '',
@@ -21,15 +23,24 @@ const venta = ref<Venta>({
 });
 const clientes = ref<Cliente[]>([]);
 
-async function crearVenta() {
+async function cargarVenta() {
   try {
-    await http.post(ENDPOINT, {
+    const response = await http.get(`${ENDPOINT}/${route.params.id}`);
+    venta.value = response.data;
+  } catch (error) {
+    console.error("Error al cargar la venta:", error);
+  }
+}
+
+async function actualizarVenta() {
+  try {
+    await http.patch(`${ENDPOINT}/${venta.value.id}`, {
       idCliente: venta.value.cliente.id,
       totalVenta: venta.value.totalVenta
     });
     router.push("/ventas");
   } catch (error) {
-    console.error("Error al crear la venta:", error);
+    console.error("Error al actualizar la venta:", error);
   }
 }
 
@@ -44,6 +55,7 @@ async function getClientes() {
 
 onMounted(() => {
   getClientes();
+  cargarVenta();
 });
 
 function goBack() {
@@ -59,23 +71,23 @@ function goBack() {
         <li class="breadcrumb-item">
           <RouterLink to="/ventas">Ventas</RouterLink>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nueva Venta</h2>
+      <h2>Editar Venta</h2>
     </div>
 
     <div class="row">
-      <form @submit.prevent="crearVenta">
+      <form @submit.prevent="actualizarVenta">
         <div class="form-floating mb-3">
           <select
             class="form-select"
             v-model="venta.cliente"
             required
           >
-            <option value="" disabled>Seleccione un elemento</option>
+            <option value="" disabled>Seleccione un cliente</option>
             <option v-for="cliente in clientes" :key="cliente.id" :value="cliente">
               {{ cliente.nombres }}
             </option>

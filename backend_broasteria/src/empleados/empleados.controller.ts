@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, ConflictException } from '@nestjs/common';
 import { EmpleadosService } from './empleados.service';
 import { CreateEmpleadoDto } from './dto/create-empleado.dto';
 import { UpdateEmpleadoDto } from './dto/update-empleado.dto';
@@ -10,8 +10,21 @@ export class EmpleadosController {
   constructor(private readonly empleadosService: EmpleadosService) {}
 
   @Post()
-  create(@Body() createEmpleadoDto: CreateEmpleadoDto) {
-    return this.empleadosService.create(createEmpleadoDto);
+  async create(@Body() createEmpleadoDto: CreateEmpleadoDto) {
+    try {
+      return await this.empleadosService.create(createEmpleadoDto);
+    } catch (error) {
+      if (error instanceof ConflictException) {
+        throw new HttpException({
+          status: HttpStatus.CONFLICT,
+          error: 'La empleado ya existe',
+        }, HttpStatus.CONFLICT);
+      }
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Error al crear la empleado',
+      }, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
@@ -34,3 +47,4 @@ export class EmpleadosController {
     return this.empleadosService.remove(+id);
   }
 }
+
