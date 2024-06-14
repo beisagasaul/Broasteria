@@ -7,15 +7,14 @@ const authStore = useAuthStore();
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+  
     <div class="wrapper">
-     <HelloWorld :msg="'SIS257' + (authStore.user ? ' - Hola ' + authStore.user : '')" />
+     
 
       <nav>
-        <RouterLink to="/">Inicio</RouterLink>
-        <RouterLink v-if="!authStore.token" to="/login" >Iniciar Sesión</RouterLink>
+        <RouterLink v-if="!authStore.token" to="/login" ></RouterLink>
         <span v-else>
+        <RouterLink to="/">Inicio</RouterLink>
         <RouterLink to="/clientes">Clientes</RouterLink>
         <RouterLink to="/ventas">Ventas</RouterLink>
         <RouterLink to="/ventadetalles"> Detalle de Ventas</RouterLink>
@@ -24,6 +23,7 @@ const authStore = useAuthStore();
         <RouterLink to="/usuarios">Usuarios</RouterLink>  
         <RouterLink to="/empleados">Empleados</RouterLink>
         <RouterLink to="/about">Acerca de</RouterLink>
+        <a @click="authStore.logout()" class="text-danger">Salir</a>
         </span>
       </nav>
     </div>
@@ -34,8 +34,8 @@ const authStore = useAuthStore();
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  line-height: 2;
+  max-height: 0vh;
 }
 
 .logo {
@@ -72,7 +72,7 @@ nav a:first-of-type {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    padding-right: calc(var(--section-gap) / 1);
   }
 
   .logo {

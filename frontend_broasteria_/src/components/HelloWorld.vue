@@ -6,11 +6,6 @@ defineProps<{
 
 <template>
   <div class="greetings">
-    <h1 class="green">Broasteria</h1>
-    <h3>
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Pollos Angy</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener"></a>. Sistema De Venta
-    </h3>
   </div>
 </template>
 
@@ -21,20 +16,8 @@ h1 {
   position: relative;
   top: -10px;
 }
+</template>
 
-h3 {
-  font-size: 1.2rem;
-}
+<style scoped>
 
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
 </style>
