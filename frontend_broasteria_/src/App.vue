@@ -15,6 +15,7 @@ const authStore = useAuthStore();
       <nav>
         <RouterLink to="/">Inicio</RouterLink>
         <RouterLink v-if="!authStore.token" to="/login" >Iniciar Sesión</RouterLink>
+        <span v-else>
         <RouterLink to="/clientes">Clientes</RouterLink>
         <RouterLink to="/ventas">Ventas</RouterLink>
         <RouterLink to="/ventadetalles"> Detalle de Ventas</RouterLink>
@@ -23,6 +24,7 @@ const authStore = useAuthStore();
         <RouterLink to="/usuarios">Usuarios</RouterLink>  
         <RouterLink to="/empleados">Empleados</RouterLink>
         <RouterLink to="/about">Acerca de</RouterLink>
+        </span>
       </nav>
     </div>
   </header>
